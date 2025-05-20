@@ -15,9 +15,8 @@ module "eks" {
       desired_size   = 2
       max_size       = 3
       min_size       = 1
-      ami_type       = "AL2_x86_64" # Amazon Linux 2 (Ubuntu not supported directly in managed node groups)
+      ami_type       = "AL2_x86_64"
     }
   }
-}
-}
+}  # <-- this closes the module block
 
