@@ -1,4 +1,4 @@
-imodule "eks" {
+module "eks" {
   source          = "terraform-aws-modules/eks/aws"
   cluster_name    = "ml-eks"
   cluster_version = "1.27"
