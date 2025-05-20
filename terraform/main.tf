@@ -1,5 +1,3 @@
-# update
-
 module "eks" {
   source          = "terraform-aws-modules/eks/aws"
   version         = "20.36.0"   # latest version
@@ -15,18 +13,14 @@ module "eks" {
     resources = ["secrets"]
   }]
 
-  node_groups = {
+  eks_managed_node_groups = {
     default = {
-      desired_capacity = 2
-      max_capacity     = 3
-      min_capacity     = 1
-      instance_type    = "t2.micro"
+      desired_size   = 2
+      max_size       = 3
+      min_size       = 1
+      instance_types = ["t2.micro"]
     }
   }
 
-  cluster_logging = {
-    enable = true
-    types  = ["api", "audit", "authenticator"]
-  }
+  enabled_cluster_log_types = ["api", "audit", "authenticator"]
 }
-
