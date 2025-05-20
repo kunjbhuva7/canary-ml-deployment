@@ -1,4 +1,3 @@
-# update
 name: CI/CD - Build, Push, Deploy (Terraform + K8s)
 
 on:
@@ -48,6 +47,11 @@ jobs:
       with:
         version: 'latest'
 
+    - name: Decode KUBECONFIG and save to file
+      run: |
+        echo "${{ secrets.KUBECONFIG_BASE64 }}" | base64 -d > kubeconfig
+      shell: bash
+
     - name: Update rollout.yaml with new image tag
       run: |
         sed -i 's|image: kunj22/ml-api:.*|image: kunj22/ml-api:${{ github.run_number }}|' k8s/rollout.yaml
@@ -57,5 +61,5 @@ jobs:
         kubectl apply -f k8s/service.yaml
         kubectl apply -f k8s/rollout.yaml
       env:
-        KUBECONFIG: ${{ secrets.KUBECONFIG }}
+        KUBECONFIG: ${{ github.workspace }}/kubeconfig
 
