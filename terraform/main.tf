@@ -16,8 +16,8 @@ module "eks" {
   version         = "20.36.0"
   cluster_name    = "ml-eks"
   cluster_version = "1.28" # Updated to a supported version (1.27 may be deprecated)
-  subnet_ids      = ["subnet-09b2621a5509bb0c06", "subnet-09b2621a5509c137b"]
-  vpc_id          = "vpc-0fe1403e8c0a90591"
+  subnet_ids      = ["subnet-0a27086d7c025dc1d", "subnet-0d4a85a1e3e90ee70"]
+  vpc_id          = "vpc-0dea2e68bf671eea0"
   enable_irsa     = true
   create_kms_key  = true
   cluster_encryption_config = {
