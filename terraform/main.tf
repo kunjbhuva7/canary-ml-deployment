@@ -1,5 +1,6 @@
 module "eks" {
   source          = "terraform-aws-modules/eks/aws"
+  version         = "18.29.2"        # ya koi stable latest version
   cluster_name    = "ml-eks"
   cluster_version = "1.27"
   subnet_ids      = ["subnet-09b2621a5509bb0c06", "subnet-09b2621a5509c137b"]
@@ -12,25 +13,17 @@ module "eks" {
     resources = ["secrets"]
   }]
 
-  # Node groups definition - worker nodes
-  node_groups = {
-    default_nodes = {
+  # Ab node_groups nahi, balki "node_groups" ke jagah "node_group" use karenge:
+  node_group = {
+    default = {
       desired_capacity = 2
       max_capacity     = 3
       min_capacity     = 1
-
-      instance_type = "t2.micro"
-
-      # AMI type for Ubuntu - set if you want Ubuntu worker nodes
-      ami_type = "AL2_x86_64" # This is Amazon Linux 2 by default; for Ubuntu use a custom AMI or different setup
-
-      # If you want Ubuntu specifically, you will have to use custom AMI IDs or other ways (see module docs)
+      instance_type    = "t2.micro"
     }
   }
 
-  # Enable cluster logging (optional)
-  cluster_logging = {
-    cluster_enabled_logs = ["api", "audit", "authenticator"]
-  }
+  # cluster_logging ke liye:
+  enabled_cluster_log_types = ["api", "audit", "authenticator"]
 }
 
