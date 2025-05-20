@@ -9,26 +9,20 @@ module "eks" {
 
   enable_irsa     = true
 
-  eks_managed_node_group_defaults = {
-    ami_type = "AL2_x86_64"
-  }
-
   eks_managed_node_groups = {
-    dev = {
-      desired_size   = 2
-      max_size       = 3
+    ubuntu_nodes = {
+      instance_types = ["t3a.medium"]
+      desired_size   = 1
+      max_size       = 1
       min_size       = 1
 
-      instance_types = ["t3.medium"]
-      capacity_type  = "ON_DEMAND"
+      ami_id         = "ami-0f403e3180720dd7e" # ✅ Ubuntu 20.04 EKS-optimized for us-west-2
     }
   }
 
-  cluster_enabled_log_types = ["api", "audit", "authenticator"]
-  cluster_log_group_name    = "/aws/eks/ml-eks/cluster"
-  create_cloudwatch_log_group = false
-
-  create_kms_key   = false
+  cluster_enabled_log_types     = ["api", "audit", "authenticator"]
+  create_cloudwatch_log_group   = true
+  create_kms_key                = false
 
   tags = {
     Environment = "dev"
