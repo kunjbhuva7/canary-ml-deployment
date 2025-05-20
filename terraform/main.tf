@@ -22,5 +22,5 @@ module "eks" {
     }
   }
 
-  enabled_cluster_log_types = ["api", "audit", "authenticator"]
+  cluster_enabled_log_types = ["api", "audit", "authenticator"]
 }
