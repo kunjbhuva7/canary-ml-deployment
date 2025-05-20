@@ -77,12 +77,12 @@ pipeline {
 
     post {
         success {
-            mail to: 'your-email@example.com',
+            mail to: 'kunjbhuva301@gmail.com',
                  subject: "SUCCESS: Canary Deployment #${env.BUILD_NUMBER}",
                  body: "The Canary Deployment of ML API succeeded. Image tag: ${DOCKER_TAG}"
         }
         failure {
-            mail to: 'your-email@example.com',
+            mail to: 'kunjbhuva301@gmail.com',
                  subject: "FAILURE: Canary Deployment #${env.BUILD_NUMBER}",
                  body: "The Canary Deployment of ML API failed. Please check the Jenkins logs."
         }
